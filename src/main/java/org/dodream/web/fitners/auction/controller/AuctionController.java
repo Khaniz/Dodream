@@ -29,6 +29,7 @@ public class AuctionController {
 
     private final AuctionService auctionService;
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/read")
     public void getRead(AuctionDTO auctionDTO, Model model) {
 
@@ -76,7 +77,7 @@ public class AuctionController {
         model.addAttribute("dtoList", pageResponseDTO.getDtoList());
 
         int page = pageRequestDTO.getPage();
-        int size = 8;
+        int size = pageRequestDTO.getSize();
         int total = pageResponseDTO.getCount();
 
         PageMaker pageMaker = new PageMaker(page, size, total);

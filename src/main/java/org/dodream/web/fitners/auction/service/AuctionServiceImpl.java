@@ -80,6 +80,7 @@ public class AuctionServiceImpl implements AuctionService {
 
     @Override
     public PageResponseDTO<AuctionListDTO> getAuctionLists(PageRequestDTO pageRequestDTO) {
+        pageRequestDTO.setSize(8);
         List<AuctionListDTO> auctionListDTOs = auctionMapper.getAuctionLists(pageRequestDTO);
         int count = auctionMapper.getAuctionListCount(pageRequestDTO);
 
@@ -87,6 +88,10 @@ public class AuctionServiceImpl implements AuctionService {
                 .dtoList(auctionListDTOs)
                 .count(count)
                 .build();
+
+        log.info("---------------------------");
+        log.info(pageRequestDTO);
+        log.info("---------------------------");
 
         return pageResponseDTO;
     }
